@@ -4,6 +4,7 @@ import useLocalStorage from "../custom Hook/LocalStorage";
 function MemoHook() {
   const [num1, setNum1] = useLocalStorage("num1", 0);
   const [num2, setNum2] = useLocalStorage("num2", 0);
+  const [value, setValue] = useState("");
   const id = useId();
 
   const add = useMemo(() => {
@@ -44,7 +45,7 @@ function MemoHook() {
             className="btn btn-primary"
             onClick={() => {
               const val = addCallback();
-              document.getElementById("call-back").innerHTML = val;
+              setValue(val);
             }}
           >
             Add
@@ -52,9 +53,7 @@ function MemoHook() {
         </div>
         <div className="col-md-6">
           <h3>Result of Memo : {add}</h3>
-          <h3>
-            Result of Callback : <span id="call-back"></span>
-          </h3>
+          <h3>Result of Callback : {value}</h3>
         </div>
       </div>
     </div>

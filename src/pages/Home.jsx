@@ -6,6 +6,7 @@ import { Table1 } from "../components/table1";
 import FormCmp from "../components/fromCmp";
 import WizardsForm from "../components/WizardsForm";
 import ReduxEx from "./reduxEx";
+import ClassCmp from "./classCmp";
 const Home = () => {
   const data = useMemo(() => movies, []);
 
@@ -43,6 +44,7 @@ const Home = () => {
     <>
       <h1 className="text-center mt-3">Home</h1>
       <br />
+      <ClassCmp />
       {/* <ReduxEx /> */}
       {/* <WizardsForm /> */}
       {/* <FormCmp /> */}

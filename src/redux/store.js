@@ -23,4 +23,8 @@ export default configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(loggingMiddleware),
+  preloadedState: {
+    counter: 5,
+    contextSlice: { value: "Hii" },
+  },
 });

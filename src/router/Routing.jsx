@@ -13,6 +13,7 @@ import WizardsForm from "../components/WizardsForm";
 import DataTable from "../components/dataTable";
 import DataTableQuery from "../components/dataTableQuery";
 import ReduxEx from "../pages/reduxEx";
+import Navbar from "../components/navBar";
 export const authProps = createContext("");
 const Routing = () => {
   const [authStatus, setAuthStatus] = useState(() =>
@@ -25,6 +26,7 @@ const Routing = () => {
   return (
     <authProps.Provider value={getAuthStatus}>
       <MenuBar />
+      {/* <Navbar /> */}
       <Routes>
         <Route path="/login" index={true} element={<Login />} />
         <Route path="/" element={<ProtectedRoute isAuth={authStatus} />}>
