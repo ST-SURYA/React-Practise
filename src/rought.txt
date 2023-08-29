@@ -1,0 +1,56 @@
+import React, { useState } from "react";
+import { BiUserCircle } from "react-icons/bi";
+import { MdOutlineWifiPassword } from "react-icons/md";
+import Button from "../components/Button";
+
+const Login = () => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const userDetails = {userName : "user" ,password : "user"}
+  const authentication = () => {
+    if(userName === userDetails.userName && password === userDetails.password){
+      console.log("successful");
+    }else{
+      console.log("incorrect user credentials");
+    }
+  };
+  return (
+    <div className="container-fluid d-flex align-items-center justify-content-center vh-100 bg-secondary">
+      <div className="text-center">
+        <form className="w-100 mx-auto card" style={{ maxWidth: "400px" }}>
+          <h3 className="card-title">Login</h3>
+          <div className="card-body  m-3">
+            <div className="mb-3">
+              <div className="input-group">
+                <BiUserCircle size={40} className="m-2" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Username"
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="mb-3">
+              <div className="input-group">
+                <MdOutlineWifiPassword size={40} className="m-2" />
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="text-center">
+              <Button name="Login" action = {authentication}/>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

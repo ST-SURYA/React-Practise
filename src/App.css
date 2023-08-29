@@ -1,0 +1,78 @@
+/* Navbar  */
+.logo-image {
+  width: 50px;
+  height: 50px;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  color: rgb(53, 217, 217) !important;
+  border-radius: 100px;
+}
+
+nav li {
+  padding: 10px;
+}
+.photo-upload-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.photo-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.preview-image {
+  width: 250px;
+  height: 200px;
+  display: block;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.active {
+  position: relative;
+  color: red !important;
+  background-color: inherit !important;
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px; /* Adjust this value to control the space between text and line */
+  width: 100%;
+  height: 1px;
+  background-color: red;
+}
+.nav-elements {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  background-color: #fef7e5;
+  width: 0px;
+  height: calc(100vh - 60px);
+  transition: all 0.3s ease-in;
+  overflow: hidden;
+}
+
+.nav-elements.active {
+  width: 270px;
+}
+
+.nav-elements ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-elements ul li {
+  margin-right: unset;
+  margin-top: 22px;
+}
