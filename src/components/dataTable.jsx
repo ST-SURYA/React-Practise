@@ -11,6 +11,7 @@ import EditModal from "./editModel";
 import Delete from "./deleteBtn";
 import EditIcon from "./editBtn";
 import Loader from "./loader";
+import HOC from "./hoc";
 
 const DataTable = () => {
   const [data, setData] = useState(() => []);
@@ -247,4 +248,4 @@ const DataTable = () => {
   );
 };
 
-export default DataTable;
+export default HOC(DataTable);

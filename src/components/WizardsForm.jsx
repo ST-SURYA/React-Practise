@@ -3,6 +3,7 @@ import { Field, Form, FormSpy } from "react-final-form";
 import InputField from "./inputField";
 import Select from "react-select";
 import { cities, states } from "../source";
+import HOC from "./hoc";
 const WizardsForm = () => {
   const [step, setStep] = useState(1);
   const [stepValid, setStepValid] = useState(false);
@@ -351,4 +352,4 @@ const WizardsForm = () => {
     </>
   );
 };
-export default WizardsForm;
+export default HOC(WizardsForm);

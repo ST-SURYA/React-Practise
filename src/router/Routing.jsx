@@ -14,6 +14,8 @@ import DataTable from "../components/dataTable";
 import DataTableQuery from "../components/dataTableQuery";
 import ReduxEx from "../pages/reduxEx";
 import Navbar from "../components/navBar";
+import SideBar from "../components/sideBar";
+import Sidebar from "../components/sideBar";
 export const authProps = createContext("");
 const Routing = () => {
   const [authStatus, setAuthStatus] = useState(() =>
@@ -26,7 +28,10 @@ const Routing = () => {
   return (
     <authProps.Provider value={getAuthStatus}>
       <MenuBar />
+      {/* <SideBar /> */}
       {/* <Navbar /> */}
+      {/* <Sidebar /> */}
+
       <Routes>
         <Route path="/login" index={true} element={<Login />} />
         <Route path="/" element={<ProtectedRoute isAuth={authStatus} />}>

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useId, useMemo, useState } from "react";
 import useLocalStorage from "../custom Hook/LocalStorage";
+import HOC from "../../components/hoc";
 
 function MemoHook() {
   const [num1, setNum1] = useLocalStorage("num1", 0);
@@ -60,4 +61,4 @@ function MemoHook() {
   );
 }
 
-export default MemoHook;
+export default HOC(MemoHook);

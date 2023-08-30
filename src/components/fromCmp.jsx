@@ -5,6 +5,7 @@ import Select from "react-select";
 import AsyncSelect from "react-select/async";
 import { states } from "../source";
 import { Spinner } from "react-bootstrap";
+import HOC from "./hoc";
 const FormCmp = () => {
   const [selectedState, setSelectedState] = useState("");
   const [cities, setCities] = useState([]);
@@ -377,4 +378,4 @@ const FormCmp = () => {
     </>
   );
 };
-export default FormCmp;
+export default HOC(FormCmp);

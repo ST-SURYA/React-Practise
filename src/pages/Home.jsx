@@ -7,6 +7,7 @@ import FormCmp from "../components/fromCmp";
 import WizardsForm from "../components/WizardsForm";
 import ReduxEx from "./reduxEx";
 import ClassCmp from "./classCmp";
+import HOC from "../components/hoc";
 const Home = () => {
   const data = useMemo(() => movies, []);
 
@@ -55,4 +56,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HOC(Home);
