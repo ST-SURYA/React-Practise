@@ -4,7 +4,7 @@ import Sidebar from "./sideBar";
 const HOC = (WrappedComponent) => {
   return function WithSidebar(props) {
     return (
-      <div className="row">
+      <div className="container row">
         <div className="col-2">
           <Sidebar />
         </div>

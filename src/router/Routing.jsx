@@ -16,6 +16,7 @@ import ReduxEx from "../pages/reduxEx";
 import Navbar from "../components/navBar";
 import SideBar from "../components/sideBar";
 import Sidebar from "../components/sideBar";
+import DataGroupTable from "../components/DataGroupTable";
 export const authProps = createContext("");
 const Routing = () => {
   const [authStatus, setAuthStatus] = useState(() =>
@@ -46,6 +47,7 @@ const Routing = () => {
           </Route>
           <Route path="table">
             <Route path="TanStackTable" element={<DataTable />} />
+            <Route path="TanStackGroup" element={<DataGroupTable />} />
             <Route path="TanStackQuery" element={<DataTableQuery />} />
           </Route>
         </Route>

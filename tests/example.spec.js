@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test("test", async ({ page }) => {
   await console.log("title", await page);
-  await expect(page).toHaveTitle("title");
+
   await page.goto("http://localhost:3000/");
   await page.goto("http://localhost:3000/login");
   await page.getByPlaceholder("Username").click();

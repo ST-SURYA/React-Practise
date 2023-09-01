@@ -12,6 +12,7 @@ import Delete from "./deleteBtn";
 import EditIcon from "./editBtn";
 import Loader from "./loader";
 import HOC from "./hoc";
+import axios from "axios";
 
 const DataTable = () => {
   const [data, setData] = useState(() => []);
@@ -49,14 +50,11 @@ const DataTable = () => {
   // krh
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(
-        `https://64c778b10a25021fde928997.mockapi.io/apt/s1/students/${id}`,
-        {
-          method: "DELETE",
-        }
+      const response = await axios.delete(
+        `https://64c778b10a25021fde928997.mockapi.io/apt/s1/students/${id}`
       );
 
-      if (response.ok) {
+      if (response.status === 200) {
         // Data deleted successfully
         const updatedData = data.filter((row) => row.id !== id);
         setData(updatedData);
@@ -67,6 +65,7 @@ const DataTable = () => {
       console.error("Error deleting data:", error);
     }
   };
+
   // Create a instance for TanStack Library
   const table = useReactTable({
     data,
@@ -88,18 +87,16 @@ const DataTable = () => {
   });
   useEffect(() => {
     setIsLoading(true);
-    fetch("https://64c778b10a25021fde928997.mockapi.io/apt/s1/index/students")
+    axios({
+      url: "https://64c778b10a25021fde928997.mockapi.io/apt/s1/index/students",
+      method: "GET",
+    }).then((res) => setTotalPage(() => Math.ceil(res.data.count / 10)));
+    axios
+      .get(
+        `https://64c778b10a25021fde928997.mockapi.io/apt/s1/students?page=${currentPage}&limit=10`
+      )
       .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        setTotalPage(() => Math.ceil(res.count / 10));
-      });
-    fetch(
-      `https://64c778b10a25021fde928997.mockapi.io/apt/s1/students?page=${currentPage}&limit=10`
-    )
-      .then((res) => {
-        return res.json();
+        return res.data;
       })
       .then((res) => {
         setData(res);

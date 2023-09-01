@@ -8,6 +8,7 @@ import WizardsForm from "../components/WizardsForm";
 import ReduxEx from "./reduxEx";
 import ClassCmp from "./classCmp";
 import HOC from "../components/hoc";
+import DataTable1 from "../components/DataTable1";
 const Home = () => {
   const data = useMemo(() => movies, []);
 
@@ -45,11 +46,12 @@ const Home = () => {
     <>
       <h1 className="text-center mt-3">Home</h1>
       <br />
-      <ClassCmp />
+      {/* <DataTable1 /> */}
+      {/* <ClassCmp /> */}
       {/* <ReduxEx /> */}
       {/* <WizardsForm /> */}
       {/* <FormCmp /> */}
-      {/* <Table1 /> */}
+      <Table1 />
       {/* <DataTable columns={coloums} /> */}
       {/* <BasicTable data={data} columns={movieColumns} /> */}
     </>

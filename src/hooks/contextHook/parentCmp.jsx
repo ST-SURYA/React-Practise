@@ -34,10 +34,10 @@ const ParentCmp = () => {
           type="text"
           id="rc"
           className="form-control mb-3"
-          onChange={() =>
+          onChange={(e) =>
             dispatch(
               setContextValue({
-                value: document.getElementById("rc").value,
+                value: e.target.value,
               })
             )
           }
