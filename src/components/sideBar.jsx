@@ -75,6 +75,9 @@ const Sidebar = () => {
                     <NavLink className="sd-link" to="/table/TanStackGroup">
                       TanStack Group
                     </NavLink>
+                    <NavLink className="sd-link" to="/table/TanStackVirtual">
+                      TanStack Virtualaizer
+                    </NavLink>
                     <NavLink className="sd-link" to="/table/TanStackQuery">
                       TanStack Query
                     </NavLink>

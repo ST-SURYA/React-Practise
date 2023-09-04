@@ -90,6 +90,14 @@ const MenuBar = () => {
                   <li>
                     <NavLink
                       className="nav-link dropdown-item"
+                      to="/table/TanStackVirtual"
+                    >
+                      TanStack Virtualaizer
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="nav-link dropdown-item"
                       to="/table/TanStackQuery"
                     >
                       TanStack Query

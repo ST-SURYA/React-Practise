@@ -152,6 +152,43 @@ nav li {
   cursor: pointer;
   text-decoration: none;
 }
+/* Data Virtual */
+html {
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.virtual table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-family: arial, sans-serif;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.virtual thead {
+  background: lightgray !important;
+  margin: 0;
+  position: sticky;
+  top: 0;
+}
+
+.virtual th {
+  border-bottom: 1px solid lightgray !important;
+  border-right: 1px solid lightgray !important;
+  padding: 2px 4px;
+}
+
+.virtual td {
+  padding: 6px;
+}
+
+.virtual .container {
+  border: 1px solid lightgray;
+  height: 500px;
+  max-width: 1000px !important;
+  overflow: auto;
+}
 
 /* * {
   margin: 0;
