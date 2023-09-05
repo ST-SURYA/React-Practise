@@ -103,6 +103,14 @@ const MenuBar = () => {
                       TanStack Query
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink
+                      className="nav-link dropdown-item"
+                      to="/table/TanStackAll"
+                    >
+                      TanStack All
+                    </NavLink>
+                  </li>
                 </ul>
               </li>
               <li className="nav-item dropdown">

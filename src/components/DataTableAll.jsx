@@ -4,6 +4,7 @@ import {
   flexRender,
   getCoreRowModel,
   getExpandedRowModel,
+  getFilteredRowModel,
   getGroupedRowModel,
   getPaginationRowModel,
   getSortedRowModel,
@@ -11,16 +12,24 @@ import {
 } from "@tanstack/react-table";
 import studentsJson from "./students.json";
 import { tab } from "@testing-library/user-event/dist/tab";
-export const Table1 = () => {
+import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
+const DataTableAll = () => {
   const [data, setData] = useState(() => studentsJson);
   const [grouping, setGrouping] = useState([]);
   const [sorting, setSorting] = useState([]);
+  const [filtering, setFilterng] = useState("");
+  const [colFilter, setColFilter] = useState([]);
   const columns = useMemo(
     () => [
       {
-        header: "id",
-        accessorKey: "id",
-        size: 50,
+        header: "Id",
+        columns: [
+          {
+            header: "id",
+            accessorKey: "id",
+            size: 20,
+          },
+        ],
       },
       {
         header: "Name",
@@ -87,40 +96,58 @@ export const Table1 = () => {
 
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getGroupedRowModel: getGroupedRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     state: {
       sorting: sorting,
       grouping: grouping,
+      globalFilter: filtering,
+      columnFilters: colFilter,
     },
     onGroupingChange: setGrouping,
     onSortingChange: setSorting,
+    onGlobalFilterChange: setFilterng,
+    onColumnFiltersChange: setColFilter,
   });
   return (
     <>
-      <table className="table table-hover ">
-        <thead className="text-center">
+      <label className="form-control text-center d-flex flex-column align-items-center">
+        Search
+        <input
+          type="text"
+          className="form-control w-25 mt-2"
+          onChange={(e) => setFilterng(e.target.value)}
+        />
+      </label>
+
+      <table className="table table-bordered table-info  table-hover ">
+        <thead className="text-center table-info">
           {table.getHeaderGroups().map((headerGroup) => {
             return (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
                     <th key={header.id} colSpan={header.colSpan}>
-                      <button
-                        className=""
-                        onClick={
-                          header.id === "id"
-                            ? header.column.getToggleSortingHandler()
-                            : null
-                        }
-                      >
-                        {
-                          { asc: "🔼", desc: "🔽" }[
-                            header.column.getIsSorted() ?? null
-                          ]
-                        }
-                      </button>
+                      {header.id === "id" && (
+                        <button
+                          className="btn"
+                          onClick={
+                            header.id === "id"
+                              ? header.column.getToggleSortingHandler()
+                              : null
+                          }
+                        >
+                          {header.column.getIsSorted() ? (
+                            { asc: <FaSortUp />, desc: <FaSortDown /> }[
+                              header.column.getIsSorted() ?? null
+                            ]
+                          ) : (
+                            <FaSort />
+                          )}
+                        </button>
+                      )}
                       {flexRender(
                         header.column.columnDef.header,
                         header.getContext()
@@ -133,6 +160,15 @@ export const Table1 = () => {
                           ? `🛑(${header.column.getGroupedIndex()}) `
                           : `👊 `}
                       </button>
+                      {header.column.getCanFilter() && (
+                        <input
+                          type="text"
+                          className="form-control"
+                          onChange={(e) =>
+                            header.column.setFilterValue(e.target.value)
+                          }
+                        />
+                      )}
                     </th>
                   );
                 })}
@@ -146,7 +182,18 @@ export const Table1 = () => {
               <tr>
                 {row.getVisibleCells().map((cell) => {
                   return (
-                    <td>
+                    <td
+                      key={cell.id}
+                      style={{
+                        background: cell.getIsGrouped()
+                          ? "#0aff0082"
+                          : cell.getIsAggregated()
+                          ? "#ffa50078"
+                          : cell.getIsPlaceholder()
+                          ? "#ff000042"
+                          : "white",
+                      }}
+                    >
                       {cell.getIsGrouped() ? (
                         <>
                           <button
@@ -154,7 +201,7 @@ export const Table1 = () => {
                             style={{
                               cursor: row.getCanExpand() ? "pointer" : "normal",
                             }}
-                            className="btn btn-outline-info"
+                            className="btn btn-info"
                           >
                             {row.getIsExpanded() ? "👇" : "👉"}{" "}
                             {flexRender(
@@ -164,7 +211,13 @@ export const Table1 = () => {
                             ({row.subRows.length})
                           </button>
                         </>
-                      ) : (
+                      ) : cell.getIsAggregated() ? (
+                        flexRender(
+                          cell.column.columnDef.aggregatedCell ??
+                            cell.column.columnDef.cell,
+                          cell.getContext()
+                        )
+                      ) : cell.getIsPlaceholder() ? null : (
                         flexRender(cell.getValue())
                       )}
 
@@ -177,7 +230,7 @@ export const Table1 = () => {
           })}
         </tbody>
       </table>
-      <div className="button-container d-flex">
+      <div className="button-container d-flex justify-content-center">
         <button
           className="btn btn-primary m-1"
           onClick={() => table.setPageIndex(0)}
@@ -208,3 +261,5 @@ export const Table1 = () => {
     </>
   );
 };
+
+export default DataTableAll;

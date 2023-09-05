@@ -81,6 +81,9 @@ const Sidebar = () => {
                     <NavLink className="sd-link" to="/table/TanStackQuery">
                       TanStack Query
                     </NavLink>
+                    <NavLink className="sd-link" to="/table/TanStackAll">
+                      TanStack All
+                    </NavLink>
                   </div>
                 </div>
               </li>

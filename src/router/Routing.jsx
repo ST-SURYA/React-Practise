@@ -19,6 +19,7 @@ import Sidebar from "../components/sideBar";
 import DataGroupTable from "../components/DataGroupTable";
 import DataVirtualizer from "../components/DataVirtualizer";
 import DataVirtualizer1 from "../components/DataVirtual1";
+import DataTableAll from "../components/DataTableAll";
 export const authProps = createContext("");
 const Routing = () => {
   const [authStatus, setAuthStatus] = useState(() =>
@@ -52,6 +53,7 @@ const Routing = () => {
             <Route path="TanStackGroup" element={<DataGroupTable />} />
             <Route path="TanStackVirtual" element={<DataVirtualizer1 />} />
             <Route path="TanStackQuery" element={<DataTableQuery />} />
+            <Route path="TanStackAll" element={<DataTableAll />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
