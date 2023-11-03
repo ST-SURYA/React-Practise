@@ -11,7 +11,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import studentsJson from "./students.json";
-import { tab } from "@testing-library/user-event/dist/tab";
 import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
 const DataTableAll = () => {
   const [data, setData] = useState(() => studentsJson);

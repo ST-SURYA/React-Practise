@@ -124,7 +124,7 @@ const DataTable = () => {
             }}
           />
           <table className="table">
-            {console.log(table.getHeaderGroups())}
+            {console.log(table.getHeaderGroups(), table.getH)}
             <thead>
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
@@ -135,8 +135,7 @@ const DataTable = () => {
                         header.id === "id"
                           ? header.column.getToggleSortingHandler()
                           : null
-                      }
-                    >
+                      }>
                       {header.isPlaceholder ? null : (
                         <div>
                           {flexRender(
@@ -201,8 +200,7 @@ const DataTable = () => {
             <button
               className="btn btn-primary m-1"
               disabled={currentPage == 1}
-              onClick={() => setCurrentPage(1)}
-            >
+              onClick={() => setCurrentPage(1)}>
               First page
             </button>
             <button
@@ -211,8 +209,7 @@ const DataTable = () => {
               onClick={() => {
                 setCurrentPage((prev) => prev - 1);
                 console.log(table.options.state.pagination.pageIndex);
-              }}
-            >
+              }}>
               Previous page
             </button>
             <button
@@ -221,15 +218,13 @@ const DataTable = () => {
               onClick={() => {
                 setCurrentPage((prev) => prev + 1);
                 console.log(table.options.state.pagination.pageIndex);
-              }}
-            >
+              }}>
               Next page
             </button>
             <button
               className="btn btn-primary m-1"
               disabled={currentPage === totalPage}
-              onClick={() => setCurrentPage(totalPage)}
-            >
+              onClick={() => setCurrentPage(totalPage)}>
               Last page
             </button>
           </div>
