@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useRef, useState } from "react";
 import ChildOne from "./childOne";
 import { useDispatch } from "react-redux";
 import { setContextValue } from "../../redux/slices/contextSlice";
+import HOC from "../../components/hoc";
 export const contexProps = createContext("");
 const ParentCmp = () => {
   const [inpVal, setInpVal] = useState("");
@@ -33,10 +34,10 @@ const ParentCmp = () => {
           type="text"
           id="rc"
           className="form-control mb-3"
-          onChange={() =>
+          onChange={(e) =>
             dispatch(
               setContextValue({
-                value: document.getElementById("rc").value,
+                value: e.target.value,
               })
             )
           }
@@ -59,4 +60,4 @@ const ParentCmp = () => {
   );
 };
 
-export default ParentCmp;
+export default HOC(ParentCmp);

@@ -3,9 +3,11 @@ import { Field, Form, FormSpy } from "react-final-form";
 import InputField from "./inputField";
 import Select from "react-select";
 import { cities, states } from "../source";
+import HOC from "./hoc";
 const WizardsForm = () => {
   const [step, setStep] = useState(1);
   const [stepValid, setStepValid] = useState(false);
+  const [src, setSrc] = useState("");
   const genderOptions = [
     { label: "Male", value: "male" },
     { label: "Female", value: "female" },
@@ -265,16 +267,7 @@ const WizardsForm = () => {
                               if (file) {
                                 const reader = new FileReader();
                                 reader.onload = (e) => {
-                                  const previewImage =
-                                    document.getElementById("preview");
-                                  console.log(
-                                    Boolean(
-                                      document.getElementById("preview").src
-                                    )
-                                  );
-                                  if (previewImage) {
-                                    previewImage.src = e.target.result;
-                                  }
+                                  setSrc(e.target.result);
                                 };
                                 reader.readAsDataURL(file);
                                 input.onChange(file.name);
@@ -289,7 +282,7 @@ const WizardsForm = () => {
                     </Field>
                     <img
                       id="preview"
-                      src=""
+                      src={src}
                       alt="Choose Your Photo"
                       className="preview-image m-auto"
                     />
@@ -351,4 +344,4 @@ const WizardsForm = () => {
     </>
   );
 };
-export default WizardsForm;
+export default HOC(WizardsForm);

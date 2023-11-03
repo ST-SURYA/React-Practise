@@ -11,6 +11,8 @@ import EditModal from "./editModel";
 import Delete from "./deleteBtn";
 import EditIcon from "./editBtn";
 import Loader from "./loader";
+import HOC from "./hoc";
+import axios from "axios";
 
 const DataTable = () => {
   const [data, setData] = useState(() => []);
@@ -48,14 +50,11 @@ const DataTable = () => {
   // krh
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(
-        `https://64c778b10a25021fde928997.mockapi.io/apt/s1/students/${id}`,
-        {
-          method: "DELETE",
-        }
+      const response = await axios.delete(
+        `https://64c778b10a25021fde928997.mockapi.io/apt/s1/students/${id}`
       );
 
-      if (response.ok) {
+      if (response.status === 200) {
         // Data deleted successfully
         const updatedData = data.filter((row) => row.id !== id);
         setData(updatedData);
@@ -66,6 +65,7 @@ const DataTable = () => {
       console.error("Error deleting data:", error);
     }
   };
+
   // Create a instance for TanStack Library
   const table = useReactTable({
     data,
@@ -87,18 +87,16 @@ const DataTable = () => {
   });
   useEffect(() => {
     setIsLoading(true);
-    fetch("https://64c778b10a25021fde928997.mockapi.io/apt/s1/index/students")
+    axios({
+      url: "https://64c778b10a25021fde928997.mockapi.io/apt/s1/index/students",
+      method: "GET",
+    }).then((res) => setTotalPage(() => Math.ceil(res.data.count / 10)));
+    axios
+      .get(
+        `https://64c778b10a25021fde928997.mockapi.io/apt/s1/students?page=${currentPage}&limit=10`
+      )
       .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        setTotalPage(() => Math.ceil(res.count / 10));
-      });
-    fetch(
-      `https://64c778b10a25021fde928997.mockapi.io/apt/s1/students?page=${currentPage}&limit=10`
-    )
-      .then((res) => {
-        return res.json();
+        return res.data;
       })
       .then((res) => {
         setData(res);
@@ -126,7 +124,7 @@ const DataTable = () => {
             }}
           />
           <table className="table">
-            {console.log(table.getHeaderGroups())}
+            {console.log(table.getHeaderGroups(), table.getH)}
             <thead>
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
@@ -137,8 +135,7 @@ const DataTable = () => {
                         header.id === "id"
                           ? header.column.getToggleSortingHandler()
                           : null
-                      }
-                    >
+                      }>
                       {header.isPlaceholder ? null : (
                         <div>
                           {flexRender(
@@ -203,8 +200,7 @@ const DataTable = () => {
             <button
               className="btn btn-primary m-1"
               disabled={currentPage == 1}
-              onClick={() => setCurrentPage(1)}
-            >
+              onClick={() => setCurrentPage(1)}>
               First page
             </button>
             <button
@@ -213,8 +209,7 @@ const DataTable = () => {
               onClick={() => {
                 setCurrentPage((prev) => prev - 1);
                 console.log(table.options.state.pagination.pageIndex);
-              }}
-            >
+              }}>
               Previous page
             </button>
             <button
@@ -223,15 +218,13 @@ const DataTable = () => {
               onClick={() => {
                 setCurrentPage((prev) => prev + 1);
                 console.log(table.options.state.pagination.pageIndex);
-              }}
-            >
+              }}>
               Next page
             </button>
             <button
               className="btn btn-primary m-1"
               disabled={currentPage === totalPage}
-              onClick={() => setCurrentPage(totalPage)}
-            >
+              onClick={() => setCurrentPage(totalPage)}>
               Last page
             </button>
           </div>
@@ -247,4 +240,4 @@ const DataTable = () => {
   );
 };
 
-export default DataTable;
+export default HOC(DataTable);

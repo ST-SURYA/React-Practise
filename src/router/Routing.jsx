@@ -13,7 +13,10 @@ import WizardsForm from "../components/WizardsForm";
 import DataTable from "../components/dataTable";
 import DataTableQuery from "../components/dataTableQuery";
 import ReduxEx from "../pages/reduxEx";
-import Navbar from "../components/navBar";
+import DataGroupTable from "../components/DataGroupTable";
+import DataVirtualizer from "../components/DataVirtualizer";
+import DataVirtualizer1 from "../components/DataVirtual1";
+import DataTableAll from "../components/DataTableAll";
 export const authProps = createContext("");
 const Routing = () => {
   const [authStatus, setAuthStatus] = useState(() =>
@@ -26,7 +29,10 @@ const Routing = () => {
   return (
     <authProps.Provider value={getAuthStatus}>
       <MenuBar />
+      {/* <SideBar /> */}
       {/* <Navbar /> */}
+      {/* <Sidebar /> */}
+
       <Routes>
         <Route path="/login" index={true} element={<Login />} />
         <Route path="/" element={<ProtectedRoute isAuth={authStatus} />}>
@@ -41,7 +47,10 @@ const Routing = () => {
           </Route>
           <Route path="table">
             <Route path="TanStackTable" element={<DataTable />} />
+            <Route path="TanStackGroup" element={<DataGroupTable />} />
+            <Route path="TanStackVirtual" element={<DataVirtualizer1 />} />
             <Route path="TanStackQuery" element={<DataTableQuery />} />
+            <Route path="TanStackAll" element={<DataTableAll />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

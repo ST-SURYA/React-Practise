@@ -7,13 +7,18 @@ import store from "./redux/store";
 // Bootstrap CDN
 import "bootstrap/dist/css/bootstrap.css";
 import { Provider } from "react-redux";
+import { ApiProvider } from "@reduxjs/toolkit/dist/query/react";
+import { dataQuery } from "./redux/services/dataQuery";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ErrorBoundary>
   </React.StrictMode>
 );
 

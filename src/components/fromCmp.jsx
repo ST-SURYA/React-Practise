@@ -5,7 +5,9 @@ import Select from "react-select";
 import AsyncSelect from "react-select/async";
 import { states } from "../source";
 import { Spinner } from "react-bootstrap";
+import HOC from "./hoc";
 const FormCmp = () => {
+  const [src, setSrc] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [cities, setCities] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
@@ -303,41 +305,24 @@ const FormCmp = () => {
               <div className="col-lg-6">
                 <label className="form-label">Upload Photo</label>
                 <div className="photo-upload-container">
-                  <Field
-                    name="photo"
-                    component="input"
-                    type="file"
-                    className="form-control"
-                    accept="image/*"
-
-                    // onChange={(event) => {
-                    //   const file = event.target.files[0];
-                    //   if (file) {
-                    //     const reader = new FileReader();
-                    //     reader.onload = (e) => {
-                    //       const previewImage =
-                    //         document.getElementById("preview");
-                    //       console.log(
-                    //         Boolean(document.getElementById("preview").src)
-                    //       );
-                    //       if (previewImage) {
-                    //         previewImage.src = e.target.result;
-                    //       }
-                    //     };
-                    //     reader.readAsDataURL(file);
-                    //   }
-                    // }}
-                  />
-
-                  {/* <img
-                    id="preview"
-                    src=""
-                    alt="Choose Your Photo"
-                    className="preview-image"
-                  /> */}
                   <Field name="photo">
-                    {({ meta }) => (
+                    {({ input, meta }) => (
                       <>
+                        <input
+                          type="file"
+                          className="form-control mb-3"
+                          onChange={(event) => {
+                            const file = event.target.files[0];
+                            if (file) {
+                              const reader = new FileReader();
+                              reader.onload = (e) => {
+                                setSrc(e.target.result);
+                              };
+                              reader.readAsDataURL(file);
+                              input.onChange(file.name);
+                            }
+                          }}
+                        />
                         {meta.error && meta.touched && (
                           <span className="text-danger">{meta.error}</span>
                         )}
@@ -345,6 +330,14 @@ const FormCmp = () => {
                     )}
                   </Field>
                 </div>
+              </div>
+              <div className="col-lg-6">
+                <img
+                  id="preview"
+                  src={src}
+                  alt="Choose Your Photo"
+                  className="preview-image m-auto mt-2"
+                />
               </div>
             </div>
 
@@ -377,4 +370,4 @@ const FormCmp = () => {
     </>
   );
 };
-export default FormCmp;
+export default HOC(FormCmp);

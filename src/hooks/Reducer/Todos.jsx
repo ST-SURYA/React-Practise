@@ -1,5 +1,6 @@
 import React, { useReducer, useRef, useState } from "react";
 import Task from "./Task";
+import HOC from "../../components/hoc";
 
 function reducer(todos, action) {
   switch (action.type) {
@@ -55,4 +56,4 @@ const Todos = () => {
   );
 };
 
-export default Todos;
+export default HOC(Todos);

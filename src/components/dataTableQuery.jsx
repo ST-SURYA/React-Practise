@@ -12,6 +12,7 @@ import Delete from "./deleteBtn";
 import EditIcon from "./editBtn";
 import Loader from "./loader";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import HOC from "./hoc";
 
 const DataTableQuery = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -232,4 +233,4 @@ const DataTableQuery = () => {
   );
 };
 
-export default DataTableQuery;
+export default HOC(DataTableQuery);
